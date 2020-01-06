@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Home</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <h2 text-center>Geo Mapping for Stroke Victims</h2>
+  <agm-map id="map"
+  [latitude]="lat"
+  [longitude]="lng"
+  [zoom]="zoom"
+  [disableDefaultUI]="false"
+  [zoomControl]="false"
+  (mapClick)="mapClicked($event)">
+
+  <agm-marker 
+      *ngIf="markers"
+      (markerClick)="clickedMarker(markers.label, i)"
+      [latitude]="markers.Marklat"
+      [longitude]="markers.Marklng"
+      [label]="markers.label"
+      [markerDraggable]="markers.Markdraggable"
+      (dragEnd)="markerDragEnd(marker, $event)">
+      
+    <agm-info-window>
+      <p id="address"></p>
+     <p *ngIf="markers">Latitide:{{markers.Marklat}}<br>Longitude:{{markers.Marklng}}</p>
+    </agm-info-window>
+    
+  </agm-marker>
+ 
+  
+
+</agm-map>
+ 
+   <p *ngIf="markers">Marker At: ({{markers.Marklat}},{{markers.Marklng}})</p>
+   <p id="Dist"></p>
+   <p id="Route"></p>
+  
+</ion-content>
+
+
