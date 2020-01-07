@@ -36,14 +36,14 @@ import { TabsPage } from '../pages/tabs/tabs';
       libraries: ['geometry']
     }),
     AngularFireModule.initializeApp({
-      apikey: "AIzaSyC2GRIwOatzPmiamkpv3znVK8hi9g4lGoU",
-       authDomain: "geo-mapping-proj-1574028047763.firebaseapp.com",
-        databaseURL: "https://geo-mapping-proj-1574028047763.firebaseio.com",
-        projectId: "geo-mapping-proj-1574028047763",
-        storageBucket: "geo-mapping-proj-1574028047763.appspot.com",
-        messagingSenderId: "712405217170",
-        //appId: "1:712405217170:web:a223f8f2320eb644b4db4b",
-        //measurementId: "G-9D0R7N8P3V" 
+      apiKey: "AIzaSyB6NmY0iFundTq06rk3mpc5Wk7LwbWdUw0",
+    authDomain: "degree-project-database.firebaseapp.com",
+    databaseURL: "https://degree-project-database.firebaseio.com",
+    projectId: "degree-project-database",
+    storageBucket: "degree-project-database.appspot.com",
+    messagingSenderId: "527765428487",
+    appId: "1:527765428487:web:57170a630f65e0bc8b4da2",
+    measurementId: "G-ML39B2PXC4" 
     }),
     AngularFireDatabaseModule,
     AngularFireAuthModule
