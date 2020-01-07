@@ -270,7 +270,7 @@ var directionsDisplay = new google.maps.DirectionsRenderer;
 
  
 
-   document.getElementById("Dist").innerText="Straight Line Distance: "+dist+" Km";
+   document.getElementById("display").innerText="Straight Line Distance: "+dist+" Km";
 
    //console.log(distance)
 

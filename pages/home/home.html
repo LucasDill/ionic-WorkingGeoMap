@@ -32,6 +32,9 @@
 }
   </style>
 <ion-content>
+  <ion-navbar>
+    <ion-title>GeoMap</ion-title>
+  </ion-navbar>
   <div id="floating-panel">
     <b>Start: </b>
     <select [(ngModel)]="start" id="start" (change)="calculateAndDisplayRoute()">
