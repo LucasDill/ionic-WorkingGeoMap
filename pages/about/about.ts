@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MouseEvent } from '@agm/core';
 import { NavController } from 'ionic-angular';
 import {AgmDirectionModule} from 'agm-direction';
+declare var google;
 
 @Component({
   selector: 'page-about',

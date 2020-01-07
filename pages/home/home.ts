@@ -8,7 +8,7 @@ import {AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 
  
 
-declare var google;
+
 
 var gmarkers, gmarkers2,gmarkers3, gmarkers4, gmarkers5, gmarkers6, gmarkers7;
 
