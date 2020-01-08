@@ -273,13 +273,7 @@ export class AboutPage {
         (response, status, request) => {
           if (status === "OK") {
             directionsDisplay.setOptions({
-              directions: {
-                // "ub" is important and not returned by web service it's an
-
-                // object containing "origin", "destination" and "travelMode"
-
-                ub: request
-              },
+             
 
               draggable: false,
 

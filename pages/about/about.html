@@ -31,6 +31,11 @@
   height: auto;
 }
   </style>
+  <ion-header>
+  <ion-navbar>
+    <ion-title>Geo Mapping for Stroke Victims</ion-title>
+  </ion-navbar>
+  </ion-header>
 <ion-content>
   
     <div #map id="map" style="height: 50%;" (mapClick)="onMapClick($event)"></div>
@@ -41,6 +46,7 @@
             <h1 class="title">Controls</h1>
             </div>
           <div>
+            <ion-list>
             <ion-item>
               <ion-label>Hospital Markers</ion-label>
             <ion-checkbox (ionChange)="AddHospitals($event)"></ion-checkbox>
@@ -69,6 +75,7 @@
               <ion-label>ORNGE Base Markers</ion-label>
             <ion-checkbox (ionChange)="AddORNGE($event)"></ion-checkbox>
             </ion-item>
+            </ion-list>
             </div>
           </ion-col>
           <ion-col col-4 >
