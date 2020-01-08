@@ -79,7 +79,7 @@ export class AboutPage {
     this.DataBase.list("/Medical_Centers/")
       .valueChanges()
       .subscribe(data => {
-        console.log((<any>data[3]).lat);
+        //console.log((<any>data[3]).lat);//just for testing 
 
         this.items = data;
       });
@@ -91,7 +91,7 @@ export class AboutPage {
       .ref("/Medical_Centers/")
       .once("value")
       .then(function(data) {
-        console.log(JSON.stringify(data.val()));
+        //console.log(JSON.stringify(data.val()));// for testing
       });
   }
 
@@ -119,7 +119,7 @@ export class AboutPage {
           this.items = data;
 
           for (var i = 0; i < data.length; i++) {
-            console.log((<any>data[i]).bHospital);
+            //console.log((<any>data[i]).bHospital);// for testing 
 
             if ((<any>data[i]).name == name) {
               chosen_location = new google.maps.LatLng(
@@ -176,7 +176,7 @@ export class AboutPage {
 
       end = chosen_location;
 
-      console.log(end);
+      //console.log(end);// for testing
 
       var distance = google.maps.geometry.spherical.computeDistanceBetween(
         start,
@@ -200,11 +200,11 @@ export class AboutPage {
         //console.log(results);
 
         if (results[0].formatted_address != null) {
-          console.log("test if");
+          //console.log("test if");// for testing 
 
           //document.getElementById("address").innerText=(results[0].formatted_address);
         } else {
-          console.log("test else");
+          //console.log("test else");// for testing
 
           //document.getElementById("address").innerText="No Address Available";
         }
@@ -257,7 +257,7 @@ export class AboutPage {
       });
 
       google.maps.event.addListener(markerobject, "drag", function(evt) {
-        console.log("marker is being dragged");
+        //console.log("marker is being dragged");// for testing 
       });
     }
 
@@ -361,7 +361,7 @@ export class AboutPage {
       this.DataBase.list("/Medical_Centers/")
         .valueChanges()
         .subscribe(data => {
-          console.log((<any>data[3]).lat);
+          //console.log((<any>data[3]).lat);// for testing
 
           this.items = data;
 
@@ -380,7 +380,7 @@ export class AboutPage {
           };
 
           for (var i = 0; i < data.length; i++) {
-            console.log((<any>data[i]).bHospital);
+            //console.log((<any>data[i]).bHospital);// for testing
 
             if (
               (<any>data[i]).bHospital == true &&
