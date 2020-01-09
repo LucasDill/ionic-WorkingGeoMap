@@ -42,16 +42,11 @@
 <ion-content>
 
 	<div #map id="map" style="height: 50%;" (mapClick)="onMapClick($event)"></div>
-	<ion-grid>
-		<ion-row>
-			<ion-col col-4>
-				<div class=bar bar-header bar-positive>
-					<h1 class="title">Controls</h1>
-				</div>
+			
 				<div>
 					<ion-item>
-						<ion-label>Elements</ion-label>
-						<ion-select [(ngModel)]="Elements" multiple="true" interface="popover">
+						<ion-label>Add Markers</ion-label>
+						<ion-select [(ngModel)]="Elements" multiple="true" interface="alert">
 							<ion-option>
 									<ion-label>Hospital Markers</ion-label>
 									<ion-checkbox (ionChange)="AddHospitals($event)"></ion-checkbox>
@@ -85,8 +80,9 @@
 					</ion-item>
 
 				</div>
-			</ion-col>
-			<ion-col col-4>
+			<ion-grid>
+        <ion-row>
+			<ion-col col-6>
 				<div class=bar bar-deader bar-positive>
 					<h1 class='title'>Legend</h1>
 				</div>
@@ -149,7 +145,7 @@
 					</ion-item>
 				</div>
 			</ion-col>
-			<ion-col col-4>
+			<ion-col col-6>
 				<div class=bar bar-deader bar-positive>
 					<h1 class='title'>Routes From</h1>
 				</div>
