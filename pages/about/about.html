@@ -51,7 +51,7 @@
 				<div>
 					<ion-item>
 						<ion-label>Elements</ion-label>
-						<ion-select [(ngModel)]="Elements" multiple="true">
+						<ion-select [(ngModel)]="Elements" multiple="true" interface="popover">
 							<ion-option>
 									<ion-label>Hospital Markers</ion-label>
 									<ion-checkbox (ionChange)="AddHospitals($event)"></ion-checkbox>
@@ -69,18 +69,18 @@
 						<ion-label>Helipad Markers</ion-label>
 						<ion-checkbox (ionChange)="AddHele($event)"></ion-checkbox>
 					</ion-option>
-					<ion-item>
+					<ion-option>
 						<ion-label>AirPort Markers</ion-label>
 						<ion-checkbox (ionChange)="AddAirport($event)"></ion-checkbox>
-					</ion-item>
-					<ion-item>
+					</ion-option>
+					<ion-option>
 						<ion-label>Ambulance Base Markers</ion-label>
 						<ion-checkbox (ionChange)="AddAmbBase($event)"></ion-checkbox>
-					</ion-item>
-					<ion-item>
+					</ion-option>
+					<ion-option>
 						<ion-label>ORNGE Base Markers</ion-label>
 						<ion-checkbox (ionChange)="AddORNGE($event)"></ion-checkbox>
-					</ion-item>
+					</ion-option>
 					</ion-select>
 					</ion-item>
 
