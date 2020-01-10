@@ -476,7 +476,7 @@ export class AboutPage {
     }
 
     function calculateAllRoutes(start) {
-      routes=[];
+      routes.length=0;
       /*let routes: Array<routecalc>=[];
       interface routecalc {
         start: any;
