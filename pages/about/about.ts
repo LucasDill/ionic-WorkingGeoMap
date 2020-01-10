@@ -19,6 +19,13 @@ interface Provider {
   bHospital: any;
   name: any;
 }
+let routes: Array<routecalc>;
+ interface routecalc{
+    start: any;
+    end:any; 
+    distance:any; 
+    time: any;
+    }
 
 var gmarkers, gmarkers2, gmarkers3, gmarkers4, gmarkers5, gmarkers6, gmarkers7;
 
@@ -287,6 +294,9 @@ export class AboutPage {
     }
 
 function calculateAndDisplayRoute(start, end) {
+ 
+  
+   
   
 var div = document.getElementById('divID');
       
@@ -307,6 +317,9 @@ var div = document.getElementById('divID');
             directionsDisplay.setDirections(response);
             var dist = response.routes[0].legs[0].distance.text;
             var time = response.routes[0].legs[0].duration.text;
+           this.routes.push(start,end,dist,time);
+          // console.log(this.routes);
+           console.log(dist);
             document.getElementById("display").innerText +=
               "Distance by Road to " +
               end +
