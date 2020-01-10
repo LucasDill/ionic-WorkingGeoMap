@@ -150,59 +150,58 @@ ion-label{
       </ion-row>
 		</ion-grid>
 	</div>
-	<!--<ion-col col-6>
-				<div class=bar bar-deader bar-positive>
-					<h1 class='title'>Routes From</h1>
-				</div>
+	
+				<h1> Routes to Hospital</h1>
 				<div>
-					<ion-list radio-group (ionChange)="addEndLocation($event)">
+           <ion-scroll scrollY="true" style="height:145px;" >
+					<ion-list radio-group  (ionChange)="addEndLocation($event)">
+           
 						<ion-item>
-							<ion-label>TBRHSC</ion-label>
+							<ion-label  style="font-size: 1em;">TBRHSC<p id="TBrad"></p></ion-label>
 							<ion-radio slot="lat" value="Thunder Bay Regional Health Science Centre"></ion-radio>
 							<p id="TBRHSC Result"></p>
 						</ion-item>
 
 						<ion-item>
-							<ion-label>Dryden</ion-label>
+							<ion-label style="font-size: 1em;">Dryden<p id="Drad"></p></ion-label>
 							<ion-radio slot="lat" value="Dryden Regional Health Centre"></ion-radio>
 							<p id="Dryden Result"></p>
 						</ion-item>
 
 						<ion-item>
-							<ion-label>Fort Frances</ion-label>
+							<ion-label style="font-size: 1em;">Fort Frances<p id="Frad"></p></ion-label>
 							<ion-radio slot="end" value="Riverside Health Care Facilities"></ion-radio>
 							<p id="Fort Frances Result"></p>
 						</ion-item>
 
 						<ion-item>
-							<ion-label>Kenora</ion-label>
+							<ion-label style="font-size: 1em;">Kenora<p id="Krad"></p></ion-label>
 							<ion-radio slot="end" value="Lake of the Woods District Hospital"></ion-radio>
 							<p id="Kenora Result"></p>
 						</ion-item>
 
 						<ion-item>
-							<ion-label>Sioux Lookout</ion-label>
+							<ion-label style="font-size: 1em;">Sioux Lookout<p id="Srad"></p></ion-label>
 							<ion-radio slot="lat" value="Sioux Lookout Meno Ya Win Health Centre"></ion-radio>
 							<p id="Sioux Lookout Result"></p>
 						</ion-item>
-
+            
 					</ion-list>
+          </ion-scroll>
 				</div>
-			</ion-col>
-		</ion-row>-->
+			
+		
    <br>
-   <div *ngIf="CheckRoutes()">
-     <span>
-   <ion-list>
-<ion-scroll scrollY=true style="height: 20%" *ngIf="CheckRoutes()">
+   
+   <!--<ion-list>
+<ion-scroll scrollY=true style="height: 20%" >
   <p>Here<p>
   <ion-item *ngFor="let element of routes">
     City: {{element.name}}<br>Distance: {{element.distance}}   Time Needed: {{element.time}}
   </ion-item>
 </ion-scroll >
-</ion-list>
-</span>
-</div>
+</ion-list>-->
+
 	<p id="display"></p>
 </ion-content>
 <script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-app.js"></script>

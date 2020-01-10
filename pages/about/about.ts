@@ -19,7 +19,7 @@ interface Provider {
   bHospital: any;
   name: any;
 }
-let routes: Array<routecalc>=[];
+let routes: Array<routecalc> = [];
 interface routecalc {
   start: any;
   end: any;
@@ -164,10 +164,9 @@ export class AboutPage {
     //end5 = this.addEndLocation("Sioux Lookout Meno Ya Win Health Centre");
   }
 
-
   addMarker(map: any) {
     // MAP CLICKED EVENT
-//console.log(routes);
+    //console.log(routes);
     var start, end;
 
     var directionsService = new google.maps.DirectionsService();
@@ -400,9 +399,9 @@ export class AboutPage {
           if (status === "OK") {
             var dist = response.routes[0].legs[0].distance.text;
             var time = response.routes[0].legs[0].duration.text;
-            routes.push(start, end3, dist, time);
-            //document.getElementById("display").innerText +=
-              "\nDistance by Road to " +
+            //routes.push(start, end3, dist, time);
+            document.getElementById("display").innerText +=
+            "\nDistance by Road to " +
               "Fort Frances" +
               ": " +
               dist +
@@ -475,7 +474,7 @@ export class AboutPage {
     }
 
     function calculateAllRoutes(start) {
-      routes.length=0;
+      routes.length = 0;
       /*let routes: Array<routecalc>=[];
       interface routecalc {
         start: any;
@@ -496,22 +495,23 @@ export class AboutPage {
           if (status === "OK") {
             var dist = response.routes[0].legs[0].distance.text;
             var time = response.routes[0].legs[0].duration.text;
-            let putin ={} as routecalc;
-            putin.start=start;
-            putin.end=end1;
-            putin.distance=dist;
-            putin.time=time;
-            putin.name="TBRHSC";
+            let putin = {} as routecalc;
+            putin.start = start;
+            putin.end = end1;
+            putin.distance = dist;
+            putin.time = time;
+            putin.name = "TBRHSC";
             routes.push(putin);
-            document.getElementById("display").innerText +=
+            /*document.getElementById("display").innerText +=
               "\nDistance by Road to " +
               "TBRHSC" +
               ": " +
               dist +
               "\nTime By Road to " +
               "TBRHSC" +
-              ": " +
+              ": " +*/
               time;
+              document.getElementById("TBrad").innerHTML+="<b>Time:</b>"+time+"        <b> Distance:</b>"+dist;
             //console.log("test");
           } else {
             window.alert("Directions request failed due to " + status);
@@ -530,14 +530,14 @@ export class AboutPage {
           if (status === "OK") {
             var dist = response.routes[0].legs[0].distance.text;
             var time = response.routes[0].legs[0].duration.text;
-            let putin ={} as routecalc;
-            putin.start=start;
-            putin.end=end2;
-            putin.distance=dist;
-            putin.time=time;
-            putin.name="Dryden";
+            let putin = {} as routecalc;
+            putin.start = start;
+            putin.end = end2;
+            putin.distance = dist;
+            putin.time = time;
+            putin.name = "Dryden";
             routes.push(putin);
-            document.getElementById("display").innerText +=
+            /*document.getElementById("display").innerText +=
               "\nDistance by Road to " +
               "Dryden" +
               ": " +
@@ -545,9 +545,9 @@ export class AboutPage {
               "\nTime By Road to " +
               "Dryden" +
               ": " +
-              time;
+              time;*/
+              document.getElementById("Drad").innerHTML+="<b>Time:</b>"+time+"        <b> Distance:</b>"+dist;
             //console.log("test");
-            
           } else {
             window.alert("Directions request failed due to " + status);
           }
@@ -565,14 +565,14 @@ export class AboutPage {
           if (status === "OK") {
             var dist = response.routes[0].legs[0].distance.text;
             var time = response.routes[0].legs[0].duration.text;
-            let putin ={} as routecalc;
-            putin.start=start;
-            putin.end=end3;
-            putin.distance=dist;
-            putin.time=time;
-            putin.name="Fort Francis";
+            let putin = {} as routecalc;
+            putin.start = start;
+            putin.end = end3;
+            putin.distance = dist;
+            putin.time = time;
+            putin.name = "Fort Francis";
             routes.push(putin);
-            document.getElementById("display").innerText +=
+           /* document.getElementById("display").innerText +=
               "\nDistance by Road to " +
               "Fort Frances" +
               ": " +
@@ -580,7 +580,8 @@ export class AboutPage {
               "\nTime By Road to " +
               "Fort Frances" +
               ": " +
-              time;
+              time;*/
+              document.getElementById("Frad").innerHTML+="<b>Time:</b>"+time+"        <b> Distance:</b>"+dist;
             //console.log("test");
             console.log(routes);
           } else {
@@ -600,14 +601,14 @@ export class AboutPage {
           if (status === "OK") {
             var dist = response.routes[0].legs[0].distance.text;
             var time = response.routes[0].legs[0].duration.text;
-            let putin ={} as routecalc;
-            putin.start=start;
-            putin.end=end4;
-            putin.distance=dist;
-            putin.time=time;
-            putin.name="Kenora";
+            let putin = {} as routecalc;
+            putin.start = start;
+            putin.end = end4;
+            putin.distance = dist;
+            putin.time = time;
+            putin.name = "Kenora";
             routes.push(putin);
-            document.getElementById("display").innerText +=
+           /* document.getElementById("display").innerText +=
               "\nDistance by Road to " +
               "Kenora" +
               ": " +
@@ -615,7 +616,8 @@ export class AboutPage {
               "\nTime By Road to " +
               "Kenora" +
               ": " +
-              time;
+              time;*/
+              document.getElementById("Krad").innerHTML+="<b>Time:</b>"+time+"        <b> Distance:</b>"+dist;
             //console.log("test");
           } else {
             window.alert("Directions request failed due to " + status);
@@ -634,14 +636,14 @@ export class AboutPage {
           if (status === "OK") {
             var dist = response.routes[0].legs[0].distance.text;
             var time = response.routes[0].legs[0].duration.text;
-            let putin ={} as routecalc;
-            putin.start=start;
-            putin.end=end5;
-            putin.distance=dist;
-            putin.time=time;
-            putin.name="Sioux Lookout";
+            let putin = {} as routecalc;
+            putin.start = start;
+            putin.end = end5;
+            putin.distance = dist;
+            putin.time = time;
+            putin.name = "Sioux Lookout";
             routes.push(putin);
-            document.getElementById("display").innerText +=
+           /* document.getElementById("display").innerText +=
               "\nDistance by Road to " +
               "Sioux Lookout" +
               ": " +
@@ -649,20 +651,15 @@ export class AboutPage {
               "\nTime By Road to " +
               "Sioux Lookout" +
               ": " +
-              time;
-              routes=routes.sort(function(obj1,obj2){
-                return obj1.time-obj2.time;
-              });
-            
+              time;*/
+              document.getElementById("Srad").innerHTML+="<b>Time:</b>"+time+"        <b> Distance:</b>"+dist;
           } else {
             window.alert("Directions request failed due to " + status);
           }
         }
-        
       );
-      
+      console.log(routes.length);
     }
-
   }
 
   addInfoWindow(marker, content) {
@@ -674,20 +671,18 @@ export class AboutPage {
       infoWindow.open(this.map, marker);
     });
   }
-   CheckRoutes()
-{
-  if(routes!=null)
-  {
-    return 1;
-    console.log("lookedat1");
+  CheckRoutes() {
+    if (routes != null) {
+      return 1;
+      console.log("lookedat1");
+    } else {
+      return 0;
+      console.log("wasnull");
+    }
   }
-  else{
-    return 0;
-    console.log("wasnull");
-  }
-}
 
   AddMapMarkers(e) {
+    console.log(routes);
     // var last = e[e.length - 1];
     // find more sensible way to do this
     for (var i = 0; i < gmarkers.length; i++) gmarkers[i].setMap(null);
@@ -1063,3 +1058,4 @@ export class AboutPage {
       });
   }
 }
+
