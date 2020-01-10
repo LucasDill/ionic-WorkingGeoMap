@@ -1,3 +1,4 @@
+
 import { Component, ViewChild, ElementRef } from "@angular/core";
 
 import { IonicPage } from "ionic-angular";
@@ -9,18 +10,20 @@ import { AngularFireDatabase, AngularFireList } from "@angular/fire/database";
 declare var google;
 let data: Array<Provider>;
 interface Provider {
-    lat: any,
-    lng: any,
-    bHospital: any,
-    name: any,
-
+  lat: any;
+  lng: any;
+  bHospital: any;
+  name: any;
 }
 
-
 var gmarkers, gmarkers2, gmarkers3, gmarkers4, gmarkers5, gmarkers6, gmarkers7;
-
+    end1 = new google.maps.LatLng(48.42481802320564, -89.27084651730922)
+    end2 = new google.maps.LatLng(49.770121, -92.83862199999999)
+    end3 = new google.maps.LatLng(48.60634, -93.39230800000001)
+    end4 = new google.maps.LatLng(49.768015, -94.49951399999998)
+    end5 = new google.maps.LatLng(50.105711, -91.92746499999998)
 var clicked_marker;
-
+var end1,end2,end3,end4,end5;
 gmarkers = [];
 
 gmarkers2 = [];
@@ -59,6 +62,7 @@ export class AboutPage {
   map: any;
 
   directionsService = new google.maps.DirectionsService();
+  directionsService1 = new google.maps.DirectionsService();
 
   directionsDisplay = new google.maps.DirectionsRenderer();
 
@@ -79,7 +83,7 @@ export class AboutPage {
     this.DataBase.list("/Medical_Centers/")
       .valueChanges()
       .subscribe(data => {
-        //console.log((<any>data[3]).lat);//just for testing 
+        //console.log((<any>data[3]).lat);//just for testing
 
         this.items = data;
       });
@@ -119,7 +123,7 @@ export class AboutPage {
           this.items = data;
 
           for (var i = 0; i < data.length; i++) {
-            //console.log((<any>data[i]).bHospital);// for testing 
+            //console.log((<any>data[i]).bHospital);// for testing
 
             if ((<any>data[i]).name == name) {
               chosen_location = new google.maps.LatLng(
@@ -134,7 +138,25 @@ export class AboutPage {
 
         //console.log(chosen_location);
       );
+      //this.getLocationNames();
   }
+
+
+  getLocationNames()
+  {
+    //end1 = new google.maps.LatLng(48.424889, -89.270721);
+    end1 = new google.maps.LatLng(48.42481802320564, -89.27084651730922)
+    //end1 = this.addEndLocation("Thunder Bay Regional Health Science Centre");
+    end2 = new google.maps.LatLng(49.770121, -92.83862199999999)
+    //end2 = this.addEndLocation("Dryden Regional Health Centre");
+    end3 = new google.maps.LatLng(48.60634, -93.39230800000001)
+    //end3 = this.addEndLocation("Riverside Health Care Facilities");
+    end4 = new google.maps.LatLng(49.768015, -94.49951399999998)
+    //end4 = this.addEndLocation("Lake of the Woods District Hospital");
+    end5 = new google.maps.LatLng(50.105711, -91.92746499999998)
+    //end5 = this.addEndLocation("Sioux Lookout Meno Ya Win Health Centre");
+  }
+
 
   addMarker(map: any) {
     // MAP CLICKED EVENT
@@ -200,12 +222,10 @@ export class AboutPage {
         //console.log(results);
 
         if (results[0].formatted_address != null) {
-          //console.log("test if");// for testing 
-
+          //console.log("test if");// for testing
           //document.getElementById("address").innerText=(results[0].formatted_address);
         } else {
           //console.log("test else");// for testing
-
           //document.getElementById("address").innerText="No Address Available";
         }
       });
@@ -257,35 +277,29 @@ export class AboutPage {
       });
 
       google.maps.event.addListener(markerobject, "drag", function(evt) {
-        //console.log("marker is being dragged");// for testing 
+        //console.log("marker is being dragged");// for testing
       });
     }
 
     function calculateAndDisplayRoute(start, end) {
+
+      
       directionsService.route(
         {
           origin: start,
-
           destination: end,
-
           travelMode: "DRIVING"
         },
         (response, status, request) => {
           if (status === "OK") {
             directionsDisplay.setOptions({
-             
-
               draggable: false,
-
               map: map
             });
-
+          
             directionsDisplay.setDirections(response);
-
             var dist = response.routes[0].legs[0].distance.text;
-
             var time = response.routes[0].legs[0].duration.text;
-
             document.getElementById("display").innerText =
               "Distance by Road to " +
               end +
@@ -300,40 +314,36 @@ export class AboutPage {
           }
         }
       );
-    }
-  }
 
-  calculateAndDisplayRoute() {
-    this.directionsService.route(
-      {
-        origin: (<any>this).start,
+directionsService.route(
+        {
+          origin: start,
+          destination: end1,
+          travelMode: "DRIVING"
+        },
+        (response, status, request) => {
+          if (status === "OK") {
 
-        destination: (<any>this).end,
-
-        travelMode: "DRIVING"
-      },
-      (response, status) => {
-        if (status === "OK") {
-          this.directionsDisplay.setDirections(response);
-
-          var dist = response.routes[0].legs[0].distance.text;
-
-          var time = response.routes[0].legs[0].duration.text;
-
-          document.getElementById("display").innerText =
-            "Distance by Road to " +
-            (<any>this).end +
-            ": " +
-            dist +
-            "\nTime By Road to " +
-            (<any>this).end +
-            ": " +
-            time;
-        } else {
-          window.alert("Directions request failed due to " + status);
+            
+            var dist1 = response.routes[0].legs[0].distance.text;
+            var time1 = response.routes[0].legs[0].duration.text;
+            document.getElementById("display").innerText =
+              "Distance by Road to " +
+              end1 +
+              ": " +
+              dist1 +
+              "\nTime By Road to " +
+              end1 +
+              ": " +
+              time1;
+              //console.log("test");
+          } else {
+            window.alert("Directions request failed due to " + status);
+          }
         }
-      }
-    );
+      );
+
+    }
   }
 
   addInfoWindow(marker, content) {
@@ -346,361 +356,224 @@ export class AboutPage {
     });
   }
 
- 
+  AddMapMarkers(e) {
+    // var last = e[e.length - 1];
+    // find more sensible way to do this
+    for (var i = 0; i < gmarkers.length; i++) gmarkers[i].setMap(null);
+    for (var i = 0; i < gmarkers2.length; i++) gmarkers2[i].setMap(null);
+    for (var i = 0; i < gmarkers3.length; i++) gmarkers3[i].setMap(null);
+    for (var i = 0; i < gmarkers4.length; i++) gmarkers4[i].setMap(null);
+    for (var i = 0; i < gmarkers5.length; i++) gmarkers5[i].setMap(null);
+    for (var i = 0; i < gmarkers6.length; i++) gmarkers6[i].setMap(null);
+    for (var i = 0; i < gmarkers7.length; i++) gmarkers7[i].setMap(null);
 
-  AddHospitals(e) {
-    if (e._value == true) {
-      //add markers
-
-      this.DataBase.list("/Medical_Centers/")
-        .valueChanges()
-        .subscribe(data => {
-          //console.log((<any>data[3]).lat);// for testing
-
-          this.items = data;
-
-          var icon = {
-            url:
-              "https://287x912zvqyps9a1m2sjek0l-wpengine.netdna-ssl.com/wp-content/uploads/2016/08/Hospital-Symbol.png", // url
-
-            scaledSize: new google.maps.Size(30, 30) // scaled size
-          };
-
-          var icon2 = {
-            url:
-              "https://www.pinclipart.com/picdir/middle/150-1503142_greek-mythology-medusa-symbol-clipart.png", // url
-
-            scaledSize: new google.maps.Size(30, 30) // scaled size
-          };
-
-          for (var i = 0; i < data.length; i++) {
-            //console.log((<any>data[i]).bHospital);// for testing
-
-            if (
-              (<any>data[i]).bHospital == true &&
-              (<any>data[i]).bRegionalStrokeCentre == false
-            ) {
-              let marker1 = new google.maps.Marker({
-                map: this.map,
-
-                animation: google.maps.Animation.DROP,
-
-                position: { lat: (<any>data[i]).lat, lng: (<any>data[i]).lng },
-
-                icon: icon
-              });
-
-              let content =
-                "<b>Name:</b> " +
-                (<any>data[i]).name +
-                "<br>" +
-                "<b>Address:</b> " +
-                (<any>data[i]).address;
-
-              this.addInfoWindow(marker1, content);
-
-              gmarkers.push(marker1);
-            } else if ((<any>data[i]).bRegionalStrokeCentre == true) {
-              let markerTB = new google.maps.Marker({
-                map: this.map,
-
-                animation: google.maps.Animation.DROP,
-
-                position: { lat: (<any>data[i]).lat, lng: (<any>data[i]).lng },
-
-                icon: icon2
-              });
-
-              let content =
-                "<b>Name:</b> " +
-                (<any>data[i]).name +
-                "<br>" +
-                "<b>Address:</b> " +
-                (<any>data[i]).address;
-
-              this.addInfoWindow(markerTB, content);
-
-              gmarkers.push(markerTB);
-            }
-          }
-        });
-    } else if (e._value == false) {
-      //remove markers
-
-      for (var i = 0; i < gmarkers.length; i++) gmarkers[i].setMap(null);
-    }
-  }
-
-  AddTele(e) {
-    if (e._value == true) {
-      //add markers
-
-      this.DataBase.list("/Medical_Centers/")
-        .valueChanges()
-        .subscribe(data => {
-          this.items = data;
-
-          var icon = {
-            url:
-              "https://www.freeiconspng.com/uploads/letter-t-icon-png-18.png", // url
-
-            scaledSize: new google.maps.Size(25, 25) // scaled size
-          };
-
-          for (var i = 0; i < data.length; i++) {
-            if ((<any>data[i]).bTelestroke == true) {
-              let marker2 = new google.maps.Marker({
-                map: this.map,
-
-                animation: google.maps.Animation.DROP,
-
-                position: { lat: (<any>data[i]).lat, lng: (<any>data[i]).lng },
-
-                icon: icon
-              });
-
-              let content =
-                "<b>Name:</b> " +
-                (<any>data[i]).name +
-                "<br>" +
-                "<b>Address:</b> " +
-                (<any>data[i]).address;
-
-              this.addInfoWindow(marker2, content);
-
-              gmarkers2.push(marker2);
-            }
-          }
-        });
-    } else if (e._value == false) {
-      //remove markers
-
-      for (var i = 0; i < gmarkers2.length; i++) gmarkers2[i].setMap(null);
-    }
-  }
-
-  AddHealthService(e) {
-    if (e._value == true) {
-      //add markers
-
-      this.DataBase.list("/Medical_Centers/")
-        .valueChanges()
-        .subscribe(data => {
-          this.items = data;
-
-          var icon = {
-            url: "https://f-scope.net/images/health-services-png-1.png", // url
-
-            scaledSize: new google.maps.Size(25, 25) // scaled size
-          };
-
-          for (var i = 0; i < data.length; i++) {
-            if ((<any>data[i]).bHealthServices == true) {
-              let marker3 = new google.maps.Marker({
-                map: this.map,
-
-                animation: google.maps.Animation.DROP,
-
-                position: { lat: (<any>data[i]).lat, lng: (<any>data[i]).lng },
-
-                icon: icon
-              });
-
-              let content =
-                "<b>Name:</b> " +
-                (<any>data[i]).name +
-                "<br>" +
-                "<b>Address:</b> " +
-                (<any>data[i]).address;
-
-              this.addInfoWindow(marker3, content);
-
-              gmarkers3.push(marker3);
-            }
-          }
-        });
-    } else if (e._value == false) {
-      //remove markers
-
-      for (var i = 0; i < gmarkers3.length; i++) gmarkers3[i].setMap(null);
-    }
-  }
-
-  AddHele(e) {
-    {
-      if (e._value == true) {
-        //add markers
-
-        this.DataBase.list("/Landing Sites/")
-          .valueChanges()
-          .subscribe(data => {
-            this.items = data;
-
-            var icon = {
-              url:
-                "https://cdn0.iconfinder.com/data/icons/medical-line-vol-2/56/helipad__landing__helicopter__emergency__fly-512.png", // url
-
-              scaledSize: new google.maps.Size(25, 25) // scaled size
-            };
-
-            for (var i = 0; i < data.length; i++) {
-              if ((<any>data[i]).type == "Helipad") {
-                let marker4 = new google.maps.Marker({
-                  map: this.map,
-
-                  animation: google.maps.Animation.DROP,
-
-                  position: { lat: (<any>data[i]).lat, lng: (<any>data[i]).lng }, //parsefloat is temporary need to fix write to database
-
-                  icon: icon
-                });
-
-                let content =
-                  "<b>Site Name:</b> " +
-                  (<any>data[i]).siteName +
-                  "<br>" +
-                  "<b>Address:</b> " +
-                  (<any>data[i]).Address +
-                  "<br>" +
-                  "<b>Identifier:</b> " +
-                  (<any>data[i]).ident;
-
-                this.addInfoWindow(marker4, content);
-
-                gmarkers4.push(marker4);
-              }
-            }
-          });
-      } else if (e._value == false) {
-        //remove markers
-
-        for (var i = 0; i < gmarkers4.length; i++) gmarkers4[i].setMap(null);
+    console.log(e);
+    console.log(e[0]);
+    for (var i = 0; i < e.length; i++) {
+      if (e[i] == 1) {
+        this.AddHospitals();
+      }
+      if (e[i] == 2) {
+        this.AddTele();
+      }
+      if (e[i] == 3) {
+        this.AddHealthService();
+      }
+      if (e[i] == 4) {
+        this.AddHele();
+      }
+      if (e[i] == 5) {
+        this.AddAirport();
+      }
+      if (e[i] == 6) {
+        this.AddAmbBase();
+      }
+      if (e[i] == 7) {
+        this.AddORNGE();
       }
     }
   }
 
-  AddAirport(e) {
-    {
-      if (e._value == true) {
-        //add markers
+  //for (var i = 0; i < gmarkers.length; i++) gmarkers[i].setMap(null);
 
-        this.DataBase.list("/Landing Sites/")
-          .valueChanges()
-          .subscribe(data => {
-            this.items = data;
+  AddHospitals() {
+    //console.log(e);
+    //add markers
 
-            var icon = {
-              url:
-                "https://images.vexels.com/media/users/3/128926/isolated/preview/c60c97eba10a56280114b19063d04655-plane-airport-round-icon-by-vexels.png", // url
+    this.DataBase.list("/Medical_Centers/")
+      .valueChanges()
+      .subscribe(data => {
+        //console.log((<any>data[3]).lat);// for testing
 
-              scaledSize: new google.maps.Size(25, 25) // scaled size
-            };
+        this.items = data;
 
-            for (var i = 0; i < data.length; i++) {
-              if ((<any>data[i]).type == "Airport") {
-                let marker5 = new google.maps.Marker({
-                  map: this.map,
+        var icon = {
+          url:
+            "https://287x912zvqyps9a1m2sjek0l-wpengine.netdna-ssl.com/wp-content/uploads/2016/08/Hospital-Symbol.png", // url
 
-                  animation: google.maps.Animation.DROP,
+          scaledSize: new google.maps.Size(30, 30) // scaled size
+        };
 
-                  position: { lat: (<any>data[i]).lat, lng: (<any>data[i]).lng }, //parsefloat is temporary need to fix write to database
+        var icon2 = {
+          url:
+            "https://www.pinclipart.com/picdir/middle/150-1503142_greek-mythology-medusa-symbol-clipart.png", // url
 
-                  icon: icon
-                });
+          scaledSize: new google.maps.Size(30, 30) // scaled size
+        };
 
-                let content =
-                  "<b>Site Name:</b> " +
-                  (<any>data[i]).siteName +
-                  "<br>" +
-                  "<b>Address:</b> " +
-                  (<any>data[i]).Address +
-                  "<br>" +
-                  "<b>Identifier:</b> " +
-                  (<any>data[i]).ident;
+        for (var i = 0; i < data.length; i++) {
+          //console.log((<any>data[i]).bHospital);// for testing
 
-                this.addInfoWindow(marker5, content);
+          if (
+            (<any>data[i]).bHospital == true &&
+            (<any>data[i]).bRegionalStrokeCentre == false
+          ) {
+            let marker1 = new google.maps.Marker({
+              map: this.map,
 
-                gmarkers5.push(marker5);
-              }
-            }
-          });
-      } else if (e._value == false) {
-        //remove markers
+              animation: google.maps.Animation.DROP,
 
-        for (var i = 0; i < gmarkers5.length; i++) gmarkers5[i].setMap(null);
-      }
-    }
+              position: { lat: (<any>data[i]).lat, lng: (<any>data[i]).lng },
+
+              icon: icon
+            });
+
+            let content =
+              "<b>Name:</b> " +
+              (<any>data[i]).name +
+              "<br>" +
+              "<b>Address:</b> " +
+              (<any>data[i]).address;
+
+            this.addInfoWindow(marker1, content);
+
+            gmarkers.push(marker1);
+          } else if ((<any>data[i]).bRegionalStrokeCentre == true) {
+            let markerTB = new google.maps.Marker({
+              map: this.map,
+
+              animation: google.maps.Animation.DROP,
+
+              position: { lat: (<any>data[i]).lat, lng: (<any>data[i]).lng },
+
+              icon: icon2
+            });
+
+            let content =
+              "<b>Name:</b> " +
+              (<any>data[i]).name +
+              "<br>" +
+              "<b>Address:</b> " +
+              (<any>data[i]).address;
+
+            this.addInfoWindow(markerTB, content);
+
+            gmarkers.push(markerTB);
+          }
+        }
+      });
   }
 
-  AddAmbBase(e) {
-    {
-      if (e._value == true) {
-        //add markers
+  AddTele() {
+    //add markers
 
-        this.DataBase.list("/Ambulance Sites/")
-          .valueChanges()
-          .subscribe(data => {
-            this.items = data;
+    this.DataBase.list("/Medical_Centers/")
+      .valueChanges()
+      .subscribe(data => {
+        this.items = data;
 
-            var icon = {
-              url:
-                "https://cdn.imgbin.com/11/7/2/imgbin-car-alarm-vehicle-computer-icons-truck-car-QhcxwW7Bm783X59tkTYw9HMYd.jpg", // url
+        var icon = {
+          url: "https://www.freeiconspng.com/uploads/letter-t-icon-png-18.png", // url
 
-              scaledSize: new google.maps.Size(26, 20) // scaled size
-            };
+          scaledSize: new google.maps.Size(25, 25) // scaled size
+        };
 
-            for (var i = 0; i < data.length; i++) {
-              let marker6 = new google.maps.Marker({
-                map: this.map,
+        for (var i = 0; i < data.length; i++) {
+          if ((<any>data[i]).bTelestroke == true) {
+            let marker2 = new google.maps.Marker({
+              map: this.map,
 
-                animation: google.maps.Animation.DROP,
+              animation: google.maps.Animation.DROP,
 
-                position: { lat: (<any>data[i]).lat, lng: (<any>data[i]).lng }, //parsefloat is temporary need to fix write to database
+              position: { lat: (<any>data[i]).lat, lng: (<any>data[i]).lng },
 
-                icon: icon
-              });
+              icon: icon
+            });
 
-              let content =
-                "<b>Site Name:</b> " +
-                (<any>data[i]).SiteName +
-                "<br>" +
-                "<b>Address:</b> " +
-                (<any>data[i]).Address +
-                "<br>" +
-                "<b>City:</b> " +
-                (<any>data[i]).city;
+            let content =
+              "<b>Name:</b> " +
+              (<any>data[i]).name +
+              "<br>" +
+              "<b>Address:</b> " +
+              (<any>data[i]).address;
 
-              this.addInfoWindow(marker6, content);
+            this.addInfoWindow(marker2, content);
 
-              gmarkers6.push(marker6);
-            }
-          });
-      } else if (e._value == false) {
-        //remove markers
-
-        for (var i = 0; i < gmarkers6.length; i++) gmarkers6[i].setMap(null);
-      }
-    }
+            gmarkers2.push(marker2);
+          }
+        }
+      });
   }
 
-  AddORNGE(e) {
-    if (e._value == true) {
-      //add markers
+  AddHealthService() {
+    //add markers
 
-      this.DataBase.list("/ORNGE Sites/")
-        .valueChanges()
-        .subscribe(data => {
-          this.items = data;
+    this.DataBase.list("/Medical_Centers/")
+      .valueChanges()
+      .subscribe(data => {
+        this.items = data;
 
-          var icon = {
-            url:
-              "https://upload.wikimedia.org/wikipedia/en/thumb/a/a6/Ornge_Logo.svg/1200px-Ornge_Logo.svg.png", // url
+        var icon = {
+          url: "https://f-scope.net/images/health-services-png-1.png", // url
 
-            scaledSize: new google.maps.Size(25, 25) // scaled size
-          };
+          scaledSize: new google.maps.Size(25, 25) // scaled size
+        };
 
-          for (var i = 0; i < data.length; i++) {
-            let marker7 = new google.maps.Marker({
+        for (var i = 0; i < data.length; i++) {
+          if ((<any>data[i]).bHealthServices == true) {
+            let marker3 = new google.maps.Marker({
+              map: this.map,
+
+              animation: google.maps.Animation.DROP,
+
+              position: { lat: (<any>data[i]).lat, lng: (<any>data[i]).lng },
+
+              icon: icon
+            });
+
+            let content =
+              "<b>Name:</b> " +
+              (<any>data[i]).name +
+              "<br>" +
+              "<b>Address:</b> " +
+              (<any>data[i]).address;
+
+            this.addInfoWindow(marker3, content);
+
+            gmarkers3.push(marker3);
+          }
+        }
+      });
+  }
+
+  AddHele() {
+    //add markers
+
+    this.DataBase.list("/Landing Sites/")
+      .valueChanges()
+      .subscribe(data => {
+        this.items = data;
+
+        var icon = {
+          url:
+            "https://cdn0.iconfinder.com/data/icons/medical-line-vol-2/56/helipad__landing__helicopter__emergency__fly-512.png", // url
+
+          scaledSize: new google.maps.Size(25, 25) // scaled size
+        };
+
+        for (var i = 0; i < data.length; i++) {
+          if ((<any>data[i]).type == "Helipad") {
+            let marker4 = new google.maps.Marker({
               map: this.map,
 
               animation: google.maps.Animation.DROP,
@@ -712,21 +585,146 @@ export class AboutPage {
 
             let content =
               "<b>Site Name:</b> " +
-              (<any>data[i]).base_name +
+              (<any>data[i]).siteName +
               "<br>" +
               "<b>Address:</b> " +
               (<any>data[i]).Address +
-              "<br>";
+              "<br>" +
+              "<b>Identifier:</b> " +
+              (<any>data[i]).ident;
 
-            this.addInfoWindow(marker7, content);
+            this.addInfoWindow(marker4, content);
 
-            gmarkers7.push(marker7);
+            gmarkers4.push(marker4);
           }
-        });
-    } else if (e._value == false) {
-      //remove markers
+        }
+      });
+  }
 
-      for (var i = 0; i < gmarkers7.length; i++) gmarkers7[i].setMap(null);
-    }
+  AddAirport() {
+    this.DataBase.list("/Landing Sites/")
+      .valueChanges()
+      .subscribe(data => {
+        this.items = data;
+
+        var icon = {
+          url:
+            "https://images.vexels.com/media/users/3/128926/isolated/preview/c60c97eba10a56280114b19063d04655-plane-airport-round-icon-by-vexels.png", // url
+
+          scaledSize: new google.maps.Size(25, 25) // scaled size
+        };
+
+        for (var i = 0; i < data.length; i++) {
+          if ((<any>data[i]).type == "Airport") {
+            let marker5 = new google.maps.Marker({
+              map: this.map,
+
+              animation: google.maps.Animation.DROP,
+
+              position: { lat: (<any>data[i]).lat, lng: (<any>data[i]).lng }, //parsefloat is temporary need to fix write to database
+
+              icon: icon
+            });
+
+            let content =
+              "<b>Site Name:</b> " +
+              (<any>data[i]).siteName +
+              "<br>" +
+              "<b>Address:</b> " +
+              (<any>data[i]).Address +
+              "<br>" +
+              "<b>Identifier:</b> " +
+              (<any>data[i]).ident;
+
+            this.addInfoWindow(marker5, content);
+
+            gmarkers5.push(marker5);
+          }
+        }
+      });
+  }
+
+  AddAmbBase() {
+    //add markers
+
+    this.DataBase.list("/Ambulance Sites/")
+      .valueChanges()
+      .subscribe(data => {
+        this.items = data;
+
+        var icon = {
+          url:
+            "https://cdn.imgbin.com/11/7/2/imgbin-car-alarm-vehicle-computer-icons-truck-car-QhcxwW7Bm783X59tkTYw9HMYd.jpg", // url
+
+          scaledSize: new google.maps.Size(26, 20) // scaled size
+        };
+
+        for (var i = 0; i < data.length; i++) {
+          let marker6 = new google.maps.Marker({
+            map: this.map,
+
+            animation: google.maps.Animation.DROP,
+
+            position: { lat: (<any>data[i]).lat, lng: (<any>data[i]).lng }, //parsefloat is temporary need to fix write to database
+
+            icon: icon
+          });
+
+          let content =
+            "<b>Site Name:</b> " +
+            (<any>data[i]).SiteName +
+            "<br>" +
+            "<b>Address:</b> " +
+            (<any>data[i]).Address +
+            "<br>" +
+            "<b>City:</b> " +
+            (<any>data[i]).city;
+
+          this.addInfoWindow(marker6, content);
+
+          gmarkers6.push(marker6);
+        }
+      });
+  }
+
+  AddORNGE() {
+    //add markers
+
+    this.DataBase.list("/ORNGE Sites/")
+      .valueChanges()
+      .subscribe(data => {
+        this.items = data;
+
+        var icon = {
+          url:
+            "https://upload.wikimedia.org/wikipedia/en/thumb/a/a6/Ornge_Logo.svg/1200px-Ornge_Logo.svg.png", // url
+
+          scaledSize: new google.maps.Size(25, 25) // scaled size
+        };
+
+        for (var i = 0; i < data.length; i++) {
+          let marker7 = new google.maps.Marker({
+            map: this.map,
+
+            animation: google.maps.Animation.DROP,
+
+            position: { lat: (<any>data[i]).lat, lng: (<any>data[i]).lng }, //parsefloat is temporary need to fix write to database
+
+            icon: icon
+          });
+
+          let content =
+            "<b>Site Name:</b> " +
+            (<any>data[i]).base_name +
+            "<br>" +
+            "<b>Address:</b> " +
+            (<any>data[i]).Address +
+            "<br>";
+
+          this.addInfoWindow(marker7, content);
+
+          gmarkers7.push(marker7);
+        }
+      });
   }
 }

@@ -43,38 +43,32 @@
 
 	<div #map id="map" style="height: 50%;" (mapClick)="onMapClick($event)"></div>
 			
-				<div>
+				<div id="markers" >
 					<ion-item>
 						<ion-label>Add Markers</ion-label>
-						<ion-select [(ngModel)]="Elements" multiple="true" interface="alert">
-							<ion-option>
+						<ion-select multiple="true" interface="alert" (ionChange)="AddMapMarkers($event)">
+							<ion-option [value]="1" (ionChange)="AddMapMarkers($event)">
 									<ion-label>Hospital Markers</ion-label>
-									<ion-checkbox (ionChange)="AddHospitals($event)"></ion-checkbox>
 							</ion-option>
-							<ion-option>
+							<ion-option [value]="2" (ionChange)="AddTele($event)">
 									<ion-label>TeleStroke Markers</ion-label>
-									<ion-checkbox (ionChange)="AddTele($event)"></ion-checkbox>
+                  <ion-checkbox (ionChange)="AddTele($event)"></ion-checkbox>
 							</ion-option>
-					<ion-option>
+					<ion-option [value]="3">
 							<ion-label>Health Service Markers</ion-label>
-							<ion-checkbox (ionChange)="AddHealthService($event)"></ion-checkbox>
-						
 					</ion-option>
-					<ion-option>
+					<ion-option [value]="4">
 						<ion-label>Helipad Markers</ion-label>
-						<ion-checkbox (ionChange)="AddHele($event)"></ion-checkbox>
 					</ion-option>
-					<ion-option>
+					<ion-option [value]="5">
 						<ion-label>AirPort Markers</ion-label>
-						<ion-checkbox (ionChange)="AddAirport($event)"></ion-checkbox>
+						<ion-checkbox ></ion-checkbox>
 					</ion-option>
-					<ion-option>
+					<ion-option [value]="6">
 						<ion-label>Ambulance Base Markers</ion-label>
-						<ion-checkbox (ionChange)="AddAmbBase($event)"></ion-checkbox>
 					</ion-option>
-					<ion-option>
+					<ion-option [value]="7">
 						<ion-label>ORNGE Base Markers</ion-label>
-						<ion-checkbox (ionChange)="AddORNGE($event)"></ion-checkbox>
 					</ion-option>
 					</ion-select>
 					</ion-item>
