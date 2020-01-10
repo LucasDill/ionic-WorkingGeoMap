@@ -190,8 +190,14 @@ ion-label{
 				</div>
 			</ion-col>
 		</ion-row>-->
-<ion-scroll style="height: 25%">
-</ion-scroll>
+   <br>
+   <ion-list>
+<ion-scroll scrollY=true style="height: 20%">
+  <ion-item ng-repeat="item in data1">
+    City: {{routes.name}}<br>Distance: {{routes.distance}}   Time Needed: {{routes.time}}
+  </ion-item>
+</ion-scroll >
+</ion-list>
 	<p id="display"></p>
 </ion-content>
 <script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-app.js"></script>
