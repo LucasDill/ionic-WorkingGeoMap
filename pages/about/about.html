@@ -191,19 +191,24 @@ ion-label{
 			</ion-col>
 		</ion-row>-->
    <br>
+   <div *ngIf="CheckRoutes()">
+     <span>
    <ion-list>
-<ion-scroll scrollY=true style="height: 20%">
-  <ion-item ng-repeat="item in data1">
-    City: {{routes.name}}<br>Distance: {{routes.distance}}   Time Needed: {{routes.time}}
+<ion-scroll scrollY=true style="height: 20%" *ngIf="CheckRoutes()">
+  <p>Here<p>
+  <ion-item *ngFor="let element of routes">
+    City: {{element.name}}<br>Distance: {{element.distance}}   Time Needed: {{element.time}}
   </ion-item>
 </ion-scroll >
 </ion-list>
+</span>
+</div>
 	<p id="display"></p>
 </ion-content>
 <script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-app.js"></script>
 
 <!-- TODO: Add SDKs for Firebase products that you want to use-->
-https://firebase.google.com/docs/web/setup#available-libraries -->
+<!--https://firebase.google.com/docs/web/setup#available-libraries -->
 <script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-analytics.js"></script>
 <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>

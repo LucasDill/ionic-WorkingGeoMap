@@ -58,7 +58,8 @@ var chosen_location;
 })
 export class AboutPage {
   public hospital: AngularFireList<any>;
-  public routes: Array<routecalc>;
+  //public routes: Array<routecalc>;
+  //routes: <routecalc>=[];
   @ViewChild("map") mapElement: ElementRef;
 
   map: any;
@@ -162,13 +163,10 @@ export class AboutPage {
     //end5 = this.addEndLocation("Sioux Lookout Meno Ya Win Health Centre");
   }
 
-  printdist() {
-    console.log("here");
-  }
 
   addMarker(map: any) {
     // MAP CLICKED EVENT
-
+//console.log(routes);
     var start, end;
 
     var directionsService = new google.maps.DirectionsService();
@@ -285,7 +283,7 @@ export class AboutPage {
       });
     }
 
-  /*  function calculateAndDisplayRoute(start, end) {
+    function calculateAndDisplayRoute(start, end) {
       var routes: Array<routecalc>;
       interface routecalc {
         start: any;
@@ -373,7 +371,7 @@ export class AboutPage {
           if (status === "OK") {
             var dist = response.routes[0].legs[0].distance.text;
             var time = response.routes[0].legs[0].duration.text;
-            routes.push(start, end2, dist, time);
+            //routes.push(start, end2, dist, time);
             document.getElementById("display").innerText +=
               "\nDistance by Road to " +
               "Dryden" +
@@ -402,7 +400,7 @@ export class AboutPage {
             var dist = response.routes[0].legs[0].distance.text;
             var time = response.routes[0].legs[0].duration.text;
             routes.push(start, end3, dist, time);
-            document.getElementById("display").innerText +=
+            //document.getElementById("display").innerText +=
               "\nDistance by Road to " +
               "Fort Frances" +
               ": " +
@@ -429,7 +427,7 @@ export class AboutPage {
           if (status === "OK") {
             var dist = response.routes[0].legs[0].distance.text;
             var time = response.routes[0].legs[0].duration.text;
-            routes.push(start, end4, dist, time);
+            //routes.push(start, end4, dist, time);
             document.getElementById("display").innerText +=
               "\nDistance by Road to " +
               "Kenora" +
@@ -457,7 +455,7 @@ export class AboutPage {
           if (status === "OK") {
             var dist = response.routes[0].legs[0].distance.text;
             var time = response.routes[0].legs[0].duration.text;
-            routes.push(start, end5, dist, time);
+            //routes.push(start, end5, dist, time);
             document.getElementById("display").innerText +=
               "\nDistance by Road to " +
               "Sioux Lookout" +
@@ -473,7 +471,7 @@ export class AboutPage {
           }
         }
       );
-    }*/
+    }
 
     function calculateAllRoutes(start) {
       routes.length=0;
@@ -670,6 +668,18 @@ export class AboutPage {
       infoWindow.open(this.map, marker);
     });
   }
+   CheckRoutes()
+{
+  if(routes!=null)
+  {
+    return 1;
+    console.log("lookedat1");
+  }
+  else{
+    return 0;
+    console.log("wasnull");
+  }
+}
 
   AddMapMarkers(e) {
     // var last = e[e.length - 1];
