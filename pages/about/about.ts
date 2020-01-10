@@ -285,7 +285,7 @@ export class AboutPage {
       });
     }
 
-    function calculateAndDisplayRoute(start, end) {
+  /*  function calculateAndDisplayRoute(start, end) {
       var routes: Array<routecalc>;
       interface routecalc {
         start: any;
@@ -473,7 +473,7 @@ export class AboutPage {
           }
         }
       );
-    }
+    }*/
 
     function calculateAllRoutes(start) {
       routes.length=0;
@@ -649,6 +649,9 @@ export class AboutPage {
               "Sioux Lookout" +
               ": " +
               time;
+              routes=routes.sort(function(obj1,obj2){
+                return obj1.time-obj2.time;
+              });
             console.log(routes);
           } else {
             window.alert("Directions request failed due to " + status);
