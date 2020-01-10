@@ -4,21 +4,22 @@
 		align-items: flex-start;
 		justify-content: start;
 	}
-
+ion-label{
+  font-size: .7em;
+}
 	.item ion-thumbnail {
 		position: relative;
-		min-height: 30px;
-		max-height: 30px;
-		width: auto;
-		overflow: hidden;
+		min-height: 20px;
+		max-height: 20px;
+		min-width: 20px;
+    max-width: 20px;
+		
 
 	}
 
-	.item-md ion-thumbnail ion-img,
-	.item-md ion-thumbnail img,
-	.item ion-thumbnail ion-img,
+	
 	.item ion-thumbnail img {
-
+    display: block;
 		position: absolute;
 		left: 50%;
 		top: 50%;
@@ -29,10 +30,7 @@
 		transform: translate(-50%, -50%);
 	}
 
-	.item ion-thumbnail img-portrait {
-		width: 100%;
-		height: auto;
-	}
+	
 </style>
 <ion-header>
 	<ion-navbar>
@@ -76,74 +74,79 @@
 	</div>
 
 
-	<div class=bar bar-deader bar-positive>
+	<!--<div class=bar bar-deader bar-positive>
 		<h1 class='title'>Legend</h1>
-	</div>
-	<div id="Legend">
-		<ion-grid>
-			<ion-row align-items-left>
+	</div>-->
+	<div id="Legend" style="height:25%;">
+		<ion-grid no-padding >
+			<ion-row no-padding class="ion-justify-content-start">
 
-				<ion-col>
+				<ion-col col-3 style="flex-wrap: nowrap;" no-padding>
 					<ion-item>
-						<ion-thumbnail item-left style="img{max-width: 5rem; min-width: 5rem;}">
-							<img src="https://287x912zvqyps9a1m2sjek0l-wpengine.netdna-ssl.com/wp-content/uploads/2016/08/Hospital-Symbol.png">
+						<ion-thumbnail no-margin item-left>
+							<img src="https://www.pinclipart.com/picdir/middle/150-1503142_greek-mythology-medusa-symbol-clipart.png" height='30' width="30">
+                </ion-thumbnail>
+							<ion-label >Regional Stroke Center</ion-label>
+					</ion-item>
+				</ion-col>
+				<ion-col col-3 style="flex-wrap: nowrap;" no-padding>
+					<ion-item>
+						<ion-thumbnail no-margin item-left>
+							<img src="https://f-scope.net/images/health-services-png-1.png" height='30' width="30">
+                </ion-thumbnail>
+							<ion-label >Health Services</ion-label>
+					</ion-item>
+				</ion-col>
+				<ion-col col-3 style="flex-wrap: nowrap;" no-padding>
+					<ion-item class="item-thumbnail-left item-text-wrap" item-left>
+						<ion-thumbnail no-margin item-left>
+							<img img-wrap src="https://287x912zvqyps9a1m2sjek0l-wpengine.netdna-ssl.com/wp-content/uploads/2016/08/Hospital-Symbol.png">
                 </ion-thumbnail>
 							<ion-label>Hospitals</ion-label>
 					</ion-item>
-				</ion-col>
-				<ion-col>
-					<ion-item>
-						<ion-thumbnail item-left>
-							<img src="https://f-scope.net/images/health-services-png-1.png" height='30' width="30">
-                </ion-thumbnail>
-							<ion-label>Health Services</ion-label>
-					</ion-item>
-				</ion-col>
-				<ion-col>
-					<ion-item>
-						<ion-thumbnail item-left>
-							<img src="https://www.freeiconspng.com/uploads/letter-t-icon-png-18.png" height="20" width="20">
-                </ion-thumbnail>
-							<ion-label>Telestroke Sites</ion-label>
-					</ion-item>
-				</ion-col>
-				<ion-col>
-					<ion-item>
-						<ion-thumbnail item-left>
-							<img src="https://www.pinclipart.com/picdir/middle/150-1503142_greek-mythology-medusa-symbol-clipart.png" height='30' width="30">
-                </ion-thumbnail>
-							<ion-label>Regional Stroke Center</ion-label>
-					</ion-item>
-				</ion-col>
-			</ion-row>
-      <ion-row>
-				<ion-item>
-					<ion-thumbnail item-left>
-						<img src="https://images.vexels.com/media/users/3/128926/isolated/preview/c60c97eba10a56280114b19063d04655-plane-airport-round-icon-by-vexels.png" height='30' width="30">
-                </ion-thumbnail>
-						<ion-label>Airport</ion-label>
-				</ion-item>
-			
-			<ion-item>
+				</ion-col >
+				<ion-col col-3 style="flex-wrap: nowrap;" no-padding>
+          <ion-item>
 				<ion-thumbnail item-left>
 					<img src="https://cdn0.iconfinder.com/data/icons/medical-line-vol-2/56/helipad__landing__helicopter__emergency__fly-512.png" height='30' width="30">
                 </ion-thumbnail>
-					<ion-label>Helepad</ion-label>
+					<ion-label >Helepad</ion-label>
 			</ion-item>
-
+				</ion-col>
+			</ion-row>
+      <ion-row no-padding>
+        <ion-col col-3 no-padding>
+				<ion-item>
+					<ion-thumbnail no-margin item-left>
+						<img no-margin src="https://images.vexels.com/media/users/3/128926/isolated/preview/c60c97eba10a56280114b19063d04655-plane-airport-round-icon-by-vexels.png" height='30' width="30">
+                </ion-thumbnail>
+						<ion-label >Airport</ion-label>
+				</ion-item>
+        </ion-col>
+			<ion-col col-3 no-padding>
+			<ion-item>
+								<ion-thumbnail no-margin item-left>
+							<img src="https://www.freeiconspng.com/uploads/letter-t-icon-png-18.png" height="20" width="20">
+                </ion-thumbnail>
+							<ion-label >Telestroke Sites</ion-label>
+					</ion-item>
+      </ion-col>
+<ion-col col-3 no-padding>
 			<ion-item>
 				<ion-thumbnail item-left>
 					<img src="https://cdn.imgbin.com/11/7/2/imgbin-car-alarm-vehicle-computer-icons-truck-car-QhcxwW7Bm783X59tkTYw9HMYd.jpg" height='30' width="30">
                 </ion-thumbnail>
-					<ion-label>Ambulance Base</ion-label>
+					<ion-label >Ambulance Base</ion-label>
 			</ion-item>
-
+</ion-col>
+<ion-col col-3 no-padding>
 			<ion-item>
 				<ion-thumbnail item-left>
 					<img src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a6/Ornge_Logo.svg/1200px-Ornge_Logo.svg.png" height='30' width="30">
                 </ion-thumbnail>
-					<ion-label>ORNGE Base</ion-label>
+					<ion-label >ORNGE Base</ion-label>
 			</ion-item>
+      </ion-col>
       </ion-row>
 		</ion-grid>
 	</div>

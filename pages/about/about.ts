@@ -688,6 +688,7 @@ directionsService.route(
           if (
             (<any>data[i]).bHospital == true &&
             (<any>data[i]).bRegionalStrokeCentre == false
+            
           ) {
             let marker1 = new google.maps.Marker({
               map: this.map,
@@ -791,7 +792,7 @@ directionsService.route(
         };
 
         for (var i = 0; i < data.length; i++) {
-          if ((<any>data[i]).bHealthServices == true) {
+          if ((<any>data[i]).bHealthServices == true&&(<any>data[i]).bTelestroke == false&&(<any>data[i]).bHospital == false) {
             let marker3 = new google.maps.Marker({
               map: this.map,
 
