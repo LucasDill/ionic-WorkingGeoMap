@@ -60,6 +60,7 @@ export class AboutPage {
   public hospital: AngularFireList<any>;
   //public routes: Array<routecalc>;
   //routes: <routecalc>=[];
+  routelist;
   @ViewChild("map") mapElement: ElementRef;
 
   map: any;
@@ -546,6 +547,7 @@ export class AboutPage {
               ": " +
               time;
             //console.log("test");
+            
           } else {
             window.alert("Directions request failed due to " + status);
           }
@@ -580,6 +582,7 @@ export class AboutPage {
               ": " +
               time;
             //console.log("test");
+            console.log(routes);
           } else {
             window.alert("Directions request failed due to " + status);
           }
@@ -650,13 +653,16 @@ export class AboutPage {
               routes=routes.sort(function(obj1,obj2){
                 return obj1.time-obj2.time;
               });
-            console.log(routes);
+            
           } else {
             window.alert("Directions request failed due to " + status);
           }
         }
+        
       );
+      
     }
+
   }
 
   addInfoWindow(marker, content) {
