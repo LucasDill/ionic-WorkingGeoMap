@@ -19,18 +19,19 @@ interface Provider {
   bHospital: any;
   name: any;
 }
-let routes: Array<routecalc>;
- interface routecalc{
-    start: any;
-    end:any; 
-    distance:any; 
-    time: any;
-    }
+let routes: Array<routecalc>=[];
+interface routecalc {
+  start: any;
+  end: any;
+  distance: any;
+  time: any;
+  name: any;
+}
 
 var gmarkers, gmarkers2, gmarkers3, gmarkers4, gmarkers5, gmarkers6, gmarkers7;
 
 var clicked_marker;
-var end1,end2,end3,end4,end5;
+var end1, end2, end3, end4, end5;
 gmarkers = [];
 
 gmarkers2 = [];
@@ -57,7 +58,7 @@ var chosen_location;
 })
 export class AboutPage {
   public hospital: AngularFireList<any>;
-
+  public routes: Array<routecalc>;
   @ViewChild("map") mapElement: ElementRef;
 
   map: any;
@@ -114,11 +115,11 @@ export class AboutPage {
 
     this.directionsDisplay.setMap(this.map);
 
-    end1 = new google.maps.LatLng(48.424818, -89.270847)
-    end2 = new google.maps.LatLng(49.770121, -92.838622)
-    end3 = new google.maps.LatLng(48.60634, -93.392308)
-    end4 = new google.maps.LatLng(49.768015, -94.499514)
-    end5 = new google.maps.LatLng(50.105711, -91.927465)
+    end1 = new google.maps.LatLng(48.424818, -89.270847);
+    end2 = new google.maps.LatLng(49.770121, -92.838622);
+    end3 = new google.maps.LatLng(48.60634, -93.392308);
+    end4 = new google.maps.LatLng(49.768015, -94.499514);
+    end5 = new google.maps.LatLng(50.105711, -91.927465);
   }
 
   addEndLocation(name) {
@@ -144,25 +145,26 @@ export class AboutPage {
 
         //console.log(chosen_location);
       );
-      //this.getLocationNames();
+    //this.getLocationNames();
   }
 
-
-  getLocationNames()
-  {
+  getLocationNames() {
     //end1 = new google.maps.LatLng(48.424889, -89.270721);
-    end1 = new google.maps.LatLng(48.42481802320564, -89.27084651730922)
+    end1 = new google.maps.LatLng(48.42481802320564, -89.27084651730922);
     //end1 = this.addEndLocation("Thunder Bay Regional Health Science Centre");
-    end2 = new google.maps.LatLng(49.770121, -92.83862199999999)
+    end2 = new google.maps.LatLng(49.770121, -92.83862199999999);
     //end2 = this.addEndLocation("Dryden Regional Health Centre");
-    end3 = new google.maps.LatLng(48.60634, -93.39230800000001)
+    end3 = new google.maps.LatLng(48.60634, -93.39230800000001);
     //end3 = this.addEndLocation("Riverside Health Care Facilities");
-    end4 = new google.maps.LatLng(49.768015, -94.49951399999998)
+    end4 = new google.maps.LatLng(49.768015, -94.49951399999998);
     //end4 = this.addEndLocation("Lake of the Woods District Hospital");
-    end5 = new google.maps.LatLng(50.105711, -91.92746499999998)
+    end5 = new google.maps.LatLng(50.105711, -91.92746499999998);
     //end5 = this.addEndLocation("Sioux Lookout Meno Ya Win Health Centre");
   }
 
+  printdist() {
+    console.log("here");
+  }
 
   addMarker(map: any) {
     // MAP CLICKED EVENT
@@ -226,15 +228,11 @@ export class AboutPage {
 
       end = chosen_location;
 
-      if (end == null)
-        {
-          calculateAllRoutes(start);
-        }
-        else
-        {
-          calculateAndDisplayRoute(start, end);
-        }
-
+      if (end == null) {
+        calculateAllRoutes(start);
+      } else {
+        calculateAndDisplayRoute(start, end);
+      }
     }
 
     function markerCoords(markerobject) {
@@ -275,17 +273,11 @@ export class AboutPage {
 
         end = chosen_location;
 
-        if (end == null)
-        {
+        if (end == null) {
           calculateAllRoutes(start);
-        }
-        else
-        {
+        } else {
           calculateAndDisplayRoute(start, end);
         }
-
-
-        
       });
 
       google.maps.event.addListener(markerobject, "drag", function(evt) {
@@ -293,15 +285,18 @@ export class AboutPage {
       });
     }
 
-function calculateAndDisplayRoute(start, end) {
- 
-  
-   
-  
-var div = document.getElementById('divID');
-      
+    function calculateAndDisplayRoute(start, end) {
+      var routes: Array<routecalc>;
+      interface routecalc {
+        start: any;
+        end: any;
+        distance: any;
+        time: any;
+      }
+      var div = document.getElementById("divID");
+
       // selected location
-      directionsService.route( 
+      directionsService.route(
         {
           origin: start,
           destination: end,
@@ -313,13 +308,15 @@ var div = document.getElementById('divID');
               draggable: false,
               map: map
             });
-          
+
             directionsDisplay.setDirections(response);
             var dist = response.routes[0].legs[0].distance.text;
             var time = response.routes[0].legs[0].duration.text;
-           this.routes.push(start,end,dist,time);
-          // console.log(this.routes);
-           console.log(dist);
+            //routes[0].start=start;
+            console.log("here");
+            //routes.push(start, end, dist, time);
+            // console.log(this.routes);
+
             document.getElementById("display").innerText +=
               "Distance by Road to " +
               end +
@@ -328,16 +325,17 @@ var div = document.getElementById('divID');
               "\nTime By Road to " +
               end +
               ": " +
-              time;
+              time +
+              "here";
           } else {
             window.alert("Directions request failed due to " + status);
           }
         }
-        );
+      );
 
-// TBRHSC
+      // TBRHSC
 
-directionsService.route(
+      directionsService.route(
         {
           origin: start,
           destination: end1,
@@ -347,6 +345,7 @@ directionsService.route(
           if (status === "OK") {
             var dist = response.routes[0].legs[0].distance.text;
             var time = response.routes[0].legs[0].duration.text;
+            //routes.push(start, end1, dist, time);
             document.getElementById("display").innerText +=
               "\nDistance by Road to " +
               "TBRHSC" +
@@ -356,15 +355,15 @@ directionsService.route(
               "TBRHSC" +
               ": " +
               time;
-              //console.log("test");
+            //console.log("test");
           } else {
             window.alert("Directions request failed due to " + status);
           }
         }
       );
 
-// Dryden
-directionsService.route(
+      // Dryden
+      directionsService.route(
         {
           origin: start,
           destination: end2,
@@ -374,6 +373,7 @@ directionsService.route(
           if (status === "OK") {
             var dist = response.routes[0].legs[0].distance.text;
             var time = response.routes[0].legs[0].duration.text;
+            routes.push(start, end2, dist, time);
             document.getElementById("display").innerText +=
               "\nDistance by Road to " +
               "Dryden" +
@@ -383,15 +383,15 @@ directionsService.route(
               "Dryden" +
               ": " +
               time;
-              //console.log("test");
+            //console.log("test");
           } else {
             window.alert("Directions request failed due to " + status);
           }
         }
       );
 
-// Fort Frances
-directionsService.route(
+      // Fort Frances
+      directionsService.route(
         {
           origin: start,
           destination: end3,
@@ -401,6 +401,7 @@ directionsService.route(
           if (status === "OK") {
             var dist = response.routes[0].legs[0].distance.text;
             var time = response.routes[0].legs[0].duration.text;
+            routes.push(start, end3, dist, time);
             document.getElementById("display").innerText +=
               "\nDistance by Road to " +
               "Fort Frances" +
@@ -410,15 +411,15 @@ directionsService.route(
               "Fort Frances" +
               ": " +
               time;
-              //console.log("test");
+            //console.log("test");
           } else {
             window.alert("Directions request failed due to " + status);
           }
         }
       );
 
-// Kenora
-directionsService.route(
+      // Kenora
+      directionsService.route(
         {
           origin: start,
           destination: end4,
@@ -428,6 +429,7 @@ directionsService.route(
           if (status === "OK") {
             var dist = response.routes[0].legs[0].distance.text;
             var time = response.routes[0].legs[0].duration.text;
+            routes.push(start, end4, dist, time);
             document.getElementById("display").innerText +=
               "\nDistance by Road to " +
               "Kenora" +
@@ -437,15 +439,15 @@ directionsService.route(
               "Kenora" +
               ": " +
               time;
-              //console.log("test");
+            //console.log("test");
           } else {
             window.alert("Directions request failed due to " + status);
           }
         }
       );
 
-// Sioux Lookout
-directionsService.route(
+      // Sioux Lookout
+      directionsService.route(
         {
           origin: start,
           destination: end5,
@@ -455,6 +457,7 @@ directionsService.route(
           if (status === "OK") {
             var dist = response.routes[0].legs[0].distance.text;
             var time = response.routes[0].legs[0].duration.text;
+            routes.push(start, end5, dist, time);
             document.getElementById("display").innerText +=
               "\nDistance by Road to " +
               "Sioux Lookout" +
@@ -464,21 +467,27 @@ directionsService.route(
               "Sioux Lookout" +
               ": " +
               time;
-              //console.log("test");
+            console.log("test");
           } else {
             window.alert("Directions request failed due to " + status);
           }
         }
       );
-
     }
 
-
-function calculateAllRoutes(start){
-  document.getElementById("display").innerText="";
-var div = document.getElementById('divID');
-// TBRHSC
-directionsService.route(
+    function calculateAllRoutes(start) {
+      routes=[];
+      /*let routes: Array<routecalc>=[];
+      interface routecalc {
+        start: any;
+        end: any;
+        distance: any;
+        time: any;
+      }*/
+      document.getElementById("display").innerText = "";
+      var div = document.getElementById("divID");
+      // TBRHSC
+      directionsService.route(
         {
           origin: start,
           destination: end1,
@@ -488,6 +497,13 @@ directionsService.route(
           if (status === "OK") {
             var dist = response.routes[0].legs[0].distance.text;
             var time = response.routes[0].legs[0].duration.text;
+            let putin ={} as routecalc;
+            putin.start=start;
+            putin.end=end1;
+            putin.distance=dist;
+            putin.time=time;
+            putin.name="TBRHSC";
+            routes.push(putin);
             document.getElementById("display").innerText +=
               "\nDistance by Road to " +
               "TBRHSC" +
@@ -497,15 +513,15 @@ directionsService.route(
               "TBRHSC" +
               ": " +
               time;
-              //console.log("test");
+            //console.log("test");
           } else {
             window.alert("Directions request failed due to " + status);
           }
         }
       );
 
-// Dryden
-directionsService.route(
+      // Dryden
+      directionsService.route(
         {
           origin: start,
           destination: end2,
@@ -515,6 +531,13 @@ directionsService.route(
           if (status === "OK") {
             var dist = response.routes[0].legs[0].distance.text;
             var time = response.routes[0].legs[0].duration.text;
+            let putin ={} as routecalc;
+            putin.start=start;
+            putin.end=end2;
+            putin.distance=dist;
+            putin.time=time;
+            putin.name="Dryden";
+            routes.push(putin);
             document.getElementById("display").innerText +=
               "\nDistance by Road to " +
               "Dryden" +
@@ -524,15 +547,15 @@ directionsService.route(
               "Dryden" +
               ": " +
               time;
-              //console.log("test");
+            //console.log("test");
           } else {
             window.alert("Directions request failed due to " + status);
           }
         }
       );
 
-// Fort Frances
-directionsService.route(
+      // Fort Frances
+      directionsService.route(
         {
           origin: start,
           destination: end3,
@@ -542,6 +565,13 @@ directionsService.route(
           if (status === "OK") {
             var dist = response.routes[0].legs[0].distance.text;
             var time = response.routes[0].legs[0].duration.text;
+            let putin ={} as routecalc;
+            putin.start=start;
+            putin.end=end3;
+            putin.distance=dist;
+            putin.time=time;
+            putin.name="Fort Francis";
+            routes.push(putin);
             document.getElementById("display").innerText +=
               "\nDistance by Road to " +
               "Fort Frances" +
@@ -551,15 +581,15 @@ directionsService.route(
               "Fort Frances" +
               ": " +
               time;
-              //console.log("test");
+            //console.log("test");
           } else {
             window.alert("Directions request failed due to " + status);
           }
         }
       );
 
-// Kenora
-directionsService.route(
+      // Kenora
+      directionsService.route(
         {
           origin: start,
           destination: end4,
@@ -569,6 +599,13 @@ directionsService.route(
           if (status === "OK") {
             var dist = response.routes[0].legs[0].distance.text;
             var time = response.routes[0].legs[0].duration.text;
+            let putin ={} as routecalc;
+            putin.start=start;
+            putin.end=end4;
+            putin.distance=dist;
+            putin.time=time;
+            putin.name="Kenora";
+            routes.push(putin);
             document.getElementById("display").innerText +=
               "\nDistance by Road to " +
               "Kenora" +
@@ -578,15 +615,15 @@ directionsService.route(
               "Kenora" +
               ": " +
               time;
-              //console.log("test");
+            //console.log("test");
           } else {
             window.alert("Directions request failed due to " + status);
           }
         }
       );
 
-// Sioux Lookout
-directionsService.route(
+      // Sioux Lookout
+      directionsService.route(
         {
           origin: start,
           destination: end5,
@@ -596,6 +633,13 @@ directionsService.route(
           if (status === "OK") {
             var dist = response.routes[0].legs[0].distance.text;
             var time = response.routes[0].legs[0].duration.text;
+            let putin ={} as routecalc;
+            putin.start=start;
+            putin.end=end5;
+            putin.distance=dist;
+            putin.time=time;
+            putin.name="Sioux Lookout";
+            routes.push(putin);
             document.getElementById("display").innerText +=
               "\nDistance by Road to " +
               "Sioux Lookout" +
@@ -605,19 +649,13 @@ directionsService.route(
               "Sioux Lookout" +
               ": " +
               time;
-              //console.log("test");
+            console.log(routes);
           } else {
             window.alert("Directions request failed due to " + status);
           }
         }
       );
-
     }
-
-
-
-
-
   }
 
   addInfoWindow(marker, content) {
@@ -701,7 +739,6 @@ directionsService.route(
           if (
             (<any>data[i]).bHospital == true &&
             (<any>data[i]).bRegionalStrokeCentre == false
-            
           ) {
             let marker1 = new google.maps.Marker({
               map: this.map,
@@ -805,7 +842,11 @@ directionsService.route(
         };
 
         for (var i = 0; i < data.length; i++) {
-          if ((<any>data[i]).bHealthServices == true&&(<any>data[i]).bTelestroke == false&&(<any>data[i]).bHospital == false) {
+          if (
+            (<any>data[i]).bHealthServices == true &&
+            (<any>data[i]).bTelestroke == false &&
+            (<any>data[i]).bHospital == false
+          ) {
             let marker3 = new google.maps.Marker({
               map: this.map,
 
