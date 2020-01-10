@@ -511,6 +511,7 @@ export class AboutPage {
               "TBRHSC" +
               ": " +*/
               time;
+               document.getElementById("TBrad").innerHTML="";
               document.getElementById("TBrad").innerHTML+="<b>Time:</b>"+time+"        <b> Distance:</b>"+dist;
             //console.log("test");
           } else {
@@ -546,6 +547,7 @@ export class AboutPage {
               "Dryden" +
               ": " +
               time;*/
+               document.getElementById("Drad").innerHTML="";
               document.getElementById("Drad").innerHTML+="<b>Time:</b>"+time+"        <b> Distance:</b>"+dist;
             //console.log("test");
           } else {
@@ -581,6 +583,7 @@ export class AboutPage {
               "Fort Frances" +
               ": " +
               time;*/
+               document.getElementById("Frad").innerHTML="";
               document.getElementById("Frad").innerHTML+="<b>Time:</b>"+time+"        <b> Distance:</b>"+dist;
             //console.log("test");
             console.log(routes);
@@ -617,6 +620,7 @@ export class AboutPage {
               "Kenora" +
               ": " +
               time;*/
+               document.getElementById("Krad").innerHTML="";
               document.getElementById("Krad").innerHTML+="<b>Time:</b>"+time+"        <b> Distance:</b>"+dist;
             //console.log("test");
           } else {
@@ -652,6 +656,7 @@ export class AboutPage {
               "Sioux Lookout" +
               ": " +
               time;*/
+              document.getElementById("Srad").innerHTML="";
               document.getElementById("Srad").innerHTML+="<b>Time:</b>"+time+"        <b> Distance:</b>"+dist;
           } else {
             window.alert("Directions request failed due to " + status);
