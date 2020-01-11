@@ -128,6 +128,10 @@ export class AboutPage {
   }
 
   addEndLocation(name) {
+    for (var i = 0; i < displayEnd.length; i++) {
+        displayEnd[i].setMap(null);
+      }
+      displayEnd.length = 0;
     this.DataBase.list("/Medical_Centers/")
       .valueChanges()
       .subscribe(
@@ -218,6 +222,7 @@ document.getElementById("display").innerText = "";
 
     map.addListener("click", function(e) {
       placeMarker(e.latLng, map);
+      clearEnd();
     });
 
     function placeMarker(position, map) {
@@ -385,7 +390,6 @@ document.getElementById("display").innerText = "";
                     "click",
                     function() {}
                   );
-                  clearEnd();
         }
       );
 
@@ -421,7 +425,6 @@ document.getElementById("display").innerText = "";
                     "click",
                     function() {}
                   );
-                  clearEnd();
         }
       );
 
@@ -456,7 +459,6 @@ document.getElementById("display").innerText = "";
                     "click",
                     function() {}
                   );
-                  clearEnd();
         }
       );
 
@@ -491,7 +493,6 @@ document.getElementById("display").innerText = "";
                     "click",
                     function() {}
                   );
-                  clearEnd();
         }
       );
 
@@ -526,7 +527,6 @@ document.getElementById("display").innerText = "";
                     "click",
                     function() {}
                   );
-                  clearEnd();
         }
       );
 
@@ -560,12 +560,12 @@ document.getElementById("display").innerText = "";
                     "click",
                     function() {}
                   );
-                  clearEnd();
         }
       );
     }
 
     function calculateAllRoutes(start) {
+      clearEnd();
       routes.length = 0;
       /*let routes: Array<routecalc>=[];
       interface routecalc {
