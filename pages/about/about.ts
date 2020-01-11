@@ -32,6 +32,7 @@ var gmarkers, gmarkers2, gmarkers3, gmarkers4, gmarkers5, gmarkers6, gmarkers7;
 
 var clicked_marker;
 var end1, end2, end3, end4, end5;
+var start;
 gmarkers = [];
 
 gmarkers2 = [];
@@ -50,6 +51,8 @@ clicked_marker = [];
 
 var chosen_location;
 
+var displayEnd = [];
+
 @IonicPage()
 @Component({
   selector: "page-about",
@@ -66,9 +69,8 @@ export class AboutPage {
   map: any;
 
   directionsService = new google.maps.DirectionsService();
-
   directionsDisplay = new google.maps.DirectionsRenderer();
-
+  
   constructor(
     public navCtrl: NavController,
     public DataBase: AngularFireDatabase
@@ -116,6 +118,7 @@ export class AboutPage {
     this.addMarker(this.map);
 
     this.directionsDisplay.setMap(this.map);
+    //this.directionsDisplay.setMap(null);
 
     end1 = new google.maps.LatLng(48.424818, -89.270847);
     end2 = new google.maps.LatLng(49.770121, -92.838622);
@@ -130,7 +133,7 @@ export class AboutPage {
       .subscribe(
         data => {
           this.items = data;
-
+document.getElementById("display").innerText = "";
           for (var i = 0; i < data.length; i++) {
             //console.log((<any>data[i]).bHospital);// for testing
 
@@ -139,14 +142,54 @@ export class AboutPage {
                 (<any>data[i]).lat,
                 (<any>data[i]).lng
               );
+
+              document.getElementById("display").innerText = "";
+              this.directionsService.route(
+                {
+                  origin: start,
+                  destination: chosen_location,
+                  travelMode: "DRIVING"
+                },
+                (response, status, request) => {
+                  if (status === "OK") {
+                    this.directionsDisplay.setOptions({
+                      draggable: false,
+                      map: this.map
+                    });
+
+                    this.directionsDisplay.setDirections(response);
+                    var dist = response.routes[0].legs[0].distance.text;
+                    var time = response.routes[0].legs[0].duration.text;
+                    //routes[0].start=start;
+                    //routes.push(start, end, dist, time);
+                    // console.log(this.routes);
+
+                    document.getElementById("display").innerText +=
+                      "\nDistance by Road to " +
+                      chosen_location +
+                      ": " +
+                      dist +
+                      "\nTime By Road to " +
+                      chosen_location +
+                      ": " +
+                      time;
+                  } else {
+                    window.alert("Directions request failed due to " + status);
+                  }
+                  displayEnd.push(this.directionsDisplay);
+                  google.maps.event.addListener(
+                    this.directionsDisplay,
+                    "click",
+                    function() {}
+                  );
+                }
+              );
             }
           }
         }
-
         //chosen_location = new google.maps.LatLng(lat, lng);
-
-        //console.log(chosen_location);
       );
+
     //this.getLocationNames();
   }
 
@@ -165,12 +208,12 @@ export class AboutPage {
   }
 
   addMarker(map: any) {
+
     // MAP CLICKED EVENT
     //console.log(routes);
-    var start, end;
+    var end;
 
     var directionsService = new google.maps.DirectionsService();
-
     var directionsDisplay = new google.maps.DirectionsRenderer();
 
     map.addListener("click", function(e) {
@@ -283,7 +326,16 @@ export class AboutPage {
       });
     }
 
+    function clearEnd() {
+      for (var i = 0; i < displayEnd.length; i++) {
+        displayEnd[i].setMap(null);
+      }
+      displayEnd.length = 0;
+    }
+
     function calculateAndDisplayRoute(start, end) {
+      document.getElementById("display").innerText = "";
+      clearEnd();
       var routes: Array<routecalc>;
       interface routecalc {
         start: any;
@@ -292,7 +344,7 @@ export class AboutPage {
         time: any;
       }
       var div = document.getElementById("divID");
-
+      routes = [];
       // selected location
       directionsService.route(
         {
@@ -311,23 +363,29 @@ export class AboutPage {
             var dist = response.routes[0].legs[0].distance.text;
             var time = response.routes[0].legs[0].duration.text;
             //routes[0].start=start;
-            console.log("here");
+            //console.log("here");
             //routes.push(start, end, dist, time);
             // console.log(this.routes);
 
             document.getElementById("display").innerText +=
-              "Distance by Road to " +
+              "\nDistance by Road to " +
               end +
               ": " +
               dist +
               "\nTime By Road to " +
               end +
               ": " +
-              time +
-              "here";
+              time;
           } else {
             window.alert("Directions request failed due to " + status);
           }
+          displayEnd.push(directionsDisplay);
+                  google.maps.event.addListener(
+                    directionsDisplay,
+                    "click",
+                    function() {}
+                  );
+                  clearEnd();
         }
       );
 
@@ -357,6 +415,13 @@ export class AboutPage {
           } else {
             window.alert("Directions request failed due to " + status);
           }
+          displayEnd.push(directionsDisplay);
+                  google.maps.event.addListener(
+                    directionsDisplay,
+                    "click",
+                    function() {}
+                  );
+                  clearEnd();
         }
       );
 
@@ -385,6 +450,13 @@ export class AboutPage {
           } else {
             window.alert("Directions request failed due to " + status);
           }
+          displayEnd.push(directionsDisplay);
+                  google.maps.event.addListener(
+                    directionsDisplay,
+                    "click",
+                    function() {}
+                  );
+                  clearEnd();
         }
       );
 
@@ -401,7 +473,7 @@ export class AboutPage {
             var time = response.routes[0].legs[0].duration.text;
             //routes.push(start, end3, dist, time);
             document.getElementById("display").innerText +=
-            "\nDistance by Road to " +
+              "\nDistance by Road to " +
               "Fort Frances" +
               ": " +
               dist +
@@ -413,6 +485,13 @@ export class AboutPage {
           } else {
             window.alert("Directions request failed due to " + status);
           }
+          displayEnd.push(directionsDisplay);
+                  google.maps.event.addListener(
+                    directionsDisplay,
+                    "click",
+                    function() {}
+                  );
+                  clearEnd();
         }
       );
 
@@ -441,6 +520,13 @@ export class AboutPage {
           } else {
             window.alert("Directions request failed due to " + status);
           }
+          displayEnd.push(directionsDisplay);
+                  google.maps.event.addListener(
+                    directionsDisplay,
+                    "click",
+                    function() {}
+                  );
+                  clearEnd();
         }
       );
 
@@ -465,10 +551,16 @@ export class AboutPage {
               "Sioux Lookout" +
               ": " +
               time;
-            console.log("test");
           } else {
             window.alert("Directions request failed due to " + status);
           }
+          displayEnd.push(directionsDisplay);
+                  google.maps.event.addListener(
+                    directionsDisplay,
+                    "click",
+                    function() {}
+                  );
+                  clearEnd();
         }
       );
     }
@@ -484,6 +576,7 @@ export class AboutPage {
       }*/
       document.getElementById("display").innerText = "";
       var div = document.getElementById("divID");
+      routes = [];
       // TBRHSC
       directionsService.route(
         {
@@ -510,9 +603,10 @@ export class AboutPage {
               "\nTime By Road to " +
               "TBRHSC" +
               ": " +*/
-              time;
-               document.getElementById("TBrad").innerHTML="";
-              document.getElementById("TBrad").innerHTML+="<b>Time:</b>"+time+"        <b> Distance:</b>"+dist;
+            time;
+            document.getElementById("TBrad").innerHTML = "";
+            document.getElementById("TBrad").innerHTML +=
+              "<b>Time:</b>" + time + "        <b> Distance:</b>" + dist;
             //console.log("test");
           } else {
             window.alert("Directions request failed due to " + status);
@@ -547,8 +641,9 @@ export class AboutPage {
               "Dryden" +
               ": " +
               time;*/
-               document.getElementById("Drad").innerHTML="";
-              document.getElementById("Drad").innerHTML+="<b>Time:</b>"+time+"        <b> Distance:</b>"+dist;
+            document.getElementById("Drad").innerHTML = "";
+            document.getElementById("Drad").innerHTML +=
+              "<b>Time:</b>" + time + "        <b> Distance:</b>" + dist;
             //console.log("test");
           } else {
             window.alert("Directions request failed due to " + status);
@@ -574,7 +669,7 @@ export class AboutPage {
             putin.time = time;
             putin.name = "Fort Francis";
             routes.push(putin);
-           /* document.getElementById("display").innerText +=
+            /* document.getElementById("display").innerText +=
               "\nDistance by Road to " +
               "Fort Frances" +
               ": " +
@@ -583,8 +678,9 @@ export class AboutPage {
               "Fort Frances" +
               ": " +
               time;*/
-               document.getElementById("Frad").innerHTML="";
-              document.getElementById("Frad").innerHTML+="<b>Time:</b>"+time+"        <b> Distance:</b>"+dist;
+            document.getElementById("Frad").innerHTML = "";
+            document.getElementById("Frad").innerHTML +=
+              "<b>Time:</b>" + time + "        <b> Distance:</b>" + dist;
             //console.log("test");
             console.log(routes);
           } else {
@@ -611,7 +707,7 @@ export class AboutPage {
             putin.time = time;
             putin.name = "Kenora";
             routes.push(putin);
-           /* document.getElementById("display").innerText +=
+            /* document.getElementById("display").innerText +=
               "\nDistance by Road to " +
               "Kenora" +
               ": " +
@@ -620,8 +716,9 @@ export class AboutPage {
               "Kenora" +
               ": " +
               time;*/
-               document.getElementById("Krad").innerHTML="";
-              document.getElementById("Krad").innerHTML+="<b>Time:</b>"+time+"        <b> Distance:</b>"+dist;
+            document.getElementById("Krad").innerHTML = "";
+            document.getElementById("Krad").innerHTML +=
+              "<b>Time:</b>" + time + "        <b> Distance:</b>" + dist;
             //console.log("test");
           } else {
             window.alert("Directions request failed due to " + status);
@@ -647,7 +744,7 @@ export class AboutPage {
             putin.time = time;
             putin.name = "Sioux Lookout";
             routes.push(putin);
-           /* document.getElementById("display").innerText +=
+            /* document.getElementById("display").innerText +=
               "\nDistance by Road to " +
               "Sioux Lookout" +
               ": " +
@@ -656,8 +753,9 @@ export class AboutPage {
               "Sioux Lookout" +
               ": " +
               time;*/
-              document.getElementById("Srad").innerHTML="";
-              document.getElementById("Srad").innerHTML+="<b>Time:</b>"+time+"        <b> Distance:</b>"+dist;
+            document.getElementById("Srad").innerHTML = "";
+            document.getElementById("Srad").innerHTML +=
+              "<b>Time:</b>" + time + "        <b> Distance:</b>" + dist;
           } else {
             window.alert("Directions request failed due to " + status);
           }
@@ -1063,4 +1161,3 @@ export class AboutPage {
       });
   }
 }
-
