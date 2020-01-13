@@ -197,19 +197,7 @@ document.getElementById("display").innerText = "";
     //this.getLocationNames();
   }
 
-  getLocationNames() {
-    //end1 = new google.maps.LatLng(48.424889, -89.270721);
-    end1 = new google.maps.LatLng(48.42481802320564, -89.27084651730922);
-    //end1 = this.addEndLocation("Thunder Bay Regional Health Science Centre");
-    end2 = new google.maps.LatLng(49.770121, -92.83862199999999);
-    //end2 = this.addEndLocation("Dryden Regional Health Centre");
-    end3 = new google.maps.LatLng(48.60634, -93.39230800000001);
-    //end3 = this.addEndLocation("Riverside Health Care Facilities");
-    end4 = new google.maps.LatLng(49.768015, -94.49951399999998);
-    //end4 = this.addEndLocation("Lake of the Woods District Hospital");
-    end5 = new google.maps.LatLng(50.105711, -91.92746499999998);
-    //end5 = this.addEndLocation("Sioux Lookout Meno Ya Win Health Centre");
-  }
+ 
 
   addMarker(map: any) {
 
